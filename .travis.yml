@@ -1,0 +1,9 @@
+sudo: required
+services:
+  - docker
+
+script:
+  - docker build -t nolte/upmodcli -f Dockerfile .
+
+notifications:
+  webhooks: https://keenio-gateway.herokuapp.com/build
