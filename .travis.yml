@@ -21,15 +21,15 @@ jobs:
   include:
     - stage: build
       script:
-        - docker build -t nolte/upmodcli -f Dockerfile .
+        - docker build -t nolte/upmpdcli -f Dockerfile .
     - script:
         - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-        - docker build -t nolte/rpi-upmodcli -f DockerfileRPI .
+        - docker build -t nolte/rpi-upmpdcli -f DockerfileRPI .
       deploy:
         # only executed on master branch
         - provider: script
-          script: $TRAVISCI_SCRIPT_DIR/dockerhub_deploy.sh $DOCKER_USERNAME $DOCKER_PASSWORD nolte/rpi-upmodcli rpi-upmodcli development
+          script: $TRAVISCI_SCRIPT_DIR/dockerhub_deploy.sh $DOCKER_USERNAME $DOCKER_PASSWORD nolte/rpi-upmpdcli rpi-upmpdcli development
           on:
             branch: development
         - provider: script
-          script: $TRAVISCI_SCRIPT_DIR/dockerhub_deploy.sh $DOCKER_USERNAME $DOCKER_PASSWORD nolte/rpi-upmodcli rpi-upmodcli latest
+          script: $TRAVISCI_SCRIPT_DIR/dockerhub_deploy.sh $DOCKER_USERNAME $DOCKER_PASSWORD nolte/rpi-upmpdcli rpi-upmpdcli latest
