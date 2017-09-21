@@ -1,9 +1,21 @@
 sudo: required
+language: bash
 services:
   - docker
 
 notifications:
   webhooks: https://keenio-gateway.herokuapp.com/build
+
+env:
+  global:
+    - TRAVISCI_SCRIPT_DIR=/tmp/ci_scripts
+    - DOCKER_USERNAME=nolte
+    - secure: "llRt59YhuF8/GMTulThdzKoItF/Qj9/W+ww1AZQjBiB/V/uDvmkRgpTkmUwDihHK3rJJ1yltzlo1jR017fDpa7Ll7t3eznebnbtEPkbqz+yLUn+G6O35dWeiXOXHjJ/UNOZpTpXIV/3/QYUtbofrhLlqiTxSoVPTXEm+ADSBPQO0n2D8AVGdVmCoOiXPes7SRYY9JT3r46fiN5Stbnl8LzkP0SN2DcnjsuBbaNRYftCgTPi6faB/yzGsi8s3B825wFfdYUe3WoD7K3mtfUWA8ahHYKX3dmGuycpHKwQJKE0Y7QhIONcrohHWR4buifidF4vfLzvOK2KAHPyLpcASSM6eoRzGd3vh0UpG1+Tg824Ize87qVDweNRLD5hfgTCk64NuqpbpHR8QveSqxmDsxHV8aT/C1e8VDFQOX+SF8/6QFlzoKpp0ushPUe0nyWZfGYiinOO+22Znr3eNvNke8j5Q2yQ+qpiKkQ1dC4XV5fZNb8p4gum/beR6udjcW8y51fSUVrqHzh11FP/jteRYTj1gy1xVusbc/ZuzO0ThD/9S5dJuEZ9aoiWu6sHL5mpzX1o7fQxt6MimAPLokknsSjJ46hM/imasGUdB5TK0qCWPspp9H8tpY1OExlvqy1zz7hyAyy1W5hyy3yS1gOW4Rpcnbl+zNLLr6P3nqrXQ9Fk="
+
+before_install:
+  - mkdir -p $TRAVISCI_SCRIPT_DIR
+  - wget https://gist.githubusercontent.com/nolte/33a1a963d8161db0641b59f26d794e01/raw/dockerhub_deploy.sh -O $TRAVISCI_SCRIPT_DIR/dockerhub_deploy.sh
+  - chmod u+x $TRAVISCI_SCRIPT_DIR/*
 
 jobs:
   include:
@@ -13,3 +25,11 @@ jobs:
     - script:
         - docker run --rm --privileged multiarch/qemu-user-static:register --reset
         - docker build -t nolte/rpi-upmodcli -f DockerfileRPI .
+      deploy:
+        # only executed on master branch
+        - provider: script
+          script: $TRAVISCI_SCRIPT_DIR/dockerhub_deploy.sh $DOCKER_USERNAME $DOCKER_PASSWORD nolte/rpi-upmodcli rpi-mopidy development
+          on:
+            branch: development
+        - provider: script
+          script: $TRAVISCI_SCRIPT_DIR/dockerhub_deploy.sh $DOCKER_USERNAME $DOCKER_PASSWORD nolte/rpi-upmodcli rpi-mopidy latest
