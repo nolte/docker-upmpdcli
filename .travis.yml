@@ -2,8 +2,14 @@ sudo: required
 services:
   - docker
 
-script:
-  - docker build -t nolte/upmodcli -f Dockerfile .
-
 notifications:
   webhooks: https://keenio-gateway.herokuapp.com/build
+
+jobs:
+  include:
+    - stage: build
+      script:
+        - docker build -t nolte/upmodcli -f Dockerfile .
+    - script:
+        - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+        - docker build -t nolte/rpi-upmodcli -f DockerfileRPI .

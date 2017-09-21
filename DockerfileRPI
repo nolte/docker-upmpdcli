@@ -1,0 +1,9 @@
+FROM resin/rpi-raspbian:jessie
+
+RUN echo "deb http://www.lesbonscomptes.com/upmpdcli/downloads/debian-jessie/ unstable main" > /etc/apt/sources.list.d/upmpdcli.list
+RUN echo "deb-src http://www.lesbonscomptes.com/upmpdcli/downloads/debian-jessie/ unstable main" >> /etc/apt/sources.list.d/upmpdcli.list
+
+RUN apt-get update
+RUN apt-get install upmpdcli -y --force-yes
+
+ENTRYPOINT ["upmpdcli"]
