@@ -28,8 +28,8 @@ jobs:
       deploy:
         # only executed on master branch
         - provider: script
-          script: $TRAVISCI_SCRIPT_DIR/dockerhub_deploy.sh $DOCKER_USERNAME $DOCKER_PASSWORD nolte/rpi-upmodcli rpi-mopidy development
+          script: $TRAVISCI_SCRIPT_DIR/dockerhub_deploy.sh $DOCKER_USERNAME $DOCKER_PASSWORD nolte/rpi-upmodcli rpi-upmodcli development
           on:
             branch: development
         - provider: script
-          script: $TRAVISCI_SCRIPT_DIR/dockerhub_deploy.sh $DOCKER_USERNAME $DOCKER_PASSWORD nolte/rpi-upmodcli rpi-mopidy latest
+          script: $TRAVISCI_SCRIPT_DIR/dockerhub_deploy.sh $DOCKER_USERNAME $DOCKER_PASSWORD nolte/rpi-upmodcli rpi-upmodcli latest
