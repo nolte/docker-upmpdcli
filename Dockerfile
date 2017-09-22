@@ -4,4 +4,6 @@ RUN add-apt-repository ppa:jean-francois-dockes/upnpp1
 
 RUN apt-get update && apt-get install upmpdcli -y
 
+EXPOSE 1900/udp
+
 ENTRYPOINT ["upmpdcli"]

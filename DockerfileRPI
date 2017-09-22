@@ -6,4 +6,6 @@ RUN echo "deb-src http://www.lesbonscomptes.com/upmpdcli/downloads/debian-jessie
 RUN apt-get update
 RUN apt-get install upmpdcli -y --force-yes
 
+EXPOSE 1900/udp
+
 ENTRYPOINT ["upmpdcli"]
