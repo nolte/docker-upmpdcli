@@ -37,5 +37,4 @@ jobs:
           script: $TRAVISCI_SCRIPT_DIR/dockerhub_deploy.sh $DOCKER_USERNAME $DOCKER_PASSWORD nolte/rpi-upmpdcli rpi-upmpdcli $TRAVIS_TAG
           on:
             tags: true
-            all_branches: true
-            condition: "$TRAVIS_TAG =~ ^v*$"
+            all_branches: false
