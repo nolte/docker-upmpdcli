@@ -34,7 +34,7 @@ jobs:
         - provider: script
           script: $TRAVISCI_SCRIPT_DIR/dockerhub_deploy.sh $DOCKER_USERNAME $DOCKER_PASSWORD nolte/rpi-upmpdcli rpi-upmpdcli latest
         - provider: script
-          script: $TRAVISCI_SCRIPT_DIR/dockerhub_deploy.sh $DOCKER_USERNAME $DOCKER_PASSWORD nolte/rpi-upmpdcli rpi-upmpdcli latest
+          script: $TRAVISCI_SCRIPT_DIR/dockerhub_deploy.sh $DOCKER_USERNAME $DOCKER_PASSWORD nolte/rpi-upmpdcli rpi-upmpdcli $TRAVIS_TAG
           on:
             tags: true
             all_branches: true
