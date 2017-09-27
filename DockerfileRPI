@@ -7,5 +7,6 @@ RUN apt-get update
 RUN apt-get install upmpdcli -y --force-yes
 
 EXPOSE 1900/udp
+EXPOSE 49152
 
 ENTRYPOINT ["upmpdcli"]
