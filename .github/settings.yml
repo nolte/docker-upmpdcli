@@ -1,0 +1,10 @@
+---
+# These settings are synced to GitHub by https://probot.github.io/apps/settings/
+
+_extends: gh-plumbing:.github/commons-settings.yml
+
+repository:
+  name: docker-upmpdcli
+  description: Docker Container for UPnP Audio Media Renderer.
+  homepage: https://nolte.github.io/docker-upmpdcli
+  topics: audio, multiroom audio, mopidy, upmpdcli, UPnP

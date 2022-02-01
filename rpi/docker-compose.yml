@@ -1,6 +1,0 @@
-#https://hub.docker.com/r/wernight/mopidy/
-upmpdcli:
-  build: ../.
-  dockerfile: DockerfileRPI
-  command: "-h mopidyhost -f dlnahost"
-  net: "host"
